@@ -1,7 +1,14 @@
+import MenuItem from './MenuItem'
+import { IconHome, IconNotification, IconSettings } from '../icons/index'
+
 export default function Sidebar() {
     return (
         <aside>
-            <h1>Menu</h1>
+            <ul>
+                <MenuItem url='/' text='Início' icon={IconHome} />
+                <MenuItem url='/settings' text='Configuração' icon={IconSettings} />
+                <MenuItem url='/notification' text='Notificações' icon={IconNotification} />
+            </ul>
         </aside>
     )
 }
