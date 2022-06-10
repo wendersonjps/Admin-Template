@@ -2,17 +2,26 @@
 import { useState } from 'react'
 
 import AuthInput from '../components/auth/AuthInput'
+import { IconWarning } from '../components/icons/index'
 
 export default function Auth() {
+    const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'register'>('login')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    function showError(msg, time = 5) {
+        setError(msg)
+        setTimeout(() => setError(null), time * 1000)
+    }
+
     function submit() {
         if (mode === 'login') {
             console.log('login')
+            showError('Ocorreu um erro no login!')
         } else {
             console.log('register')
+            showError('Ocorreu um erro ao cadastrar!')
         }
     }
 
@@ -25,6 +34,14 @@ export default function Auth() {
                 <h1 className={`text-xl font-bold mb-5`}>
                     {mode === 'login' ? 'Entre com a sua conta' : 'Cadastre-se na plataforma!'}
                 </h1>
+
+                {error ? (
+                    <div className={`flex items-center py-3 px-5 my-2 rounded-lg border-2 bg-red-400 text-white border-red-600`}>
+                        {IconWarning}
+                        <span className={`ml-3`}>{error}</span>
+                    </div>
+                ) : false}
+
                 <AuthInput label="Email" type="email" value={email} valueChanged={setEmail} required />
                 <AuthInput label="Senha" type="password" value={password} valueChanged={setPassword} required />
 
