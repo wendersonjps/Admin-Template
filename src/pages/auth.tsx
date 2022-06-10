@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
 
 import AuthInput from '../components/auth/AuthInput'
@@ -16,8 +17,11 @@ export default function Auth() {
     }
 
     return (
-        <div className={`flex flex-col h-screen items-center justify-center`}>
-            <div className={`w-1/2`}>
+        <div className={`flex h-screen items-center justify-center`}>
+            <div className={`hidden md:block md:w-1/2 lg:w-2/3`}>
+                <img src="https://source.unsplash.com/random" alt="Imagem da tela de autenticação" className={`h-screen w-full object-cover`} />
+            </div>
+            <div className={`m-10 w-full md:w-1/2 lg:w-2/3`}>
                 <h1 className={`text-xl font-bold mb-5`}>
                     {mode === 'login' ? 'Entre com a sua conta' : 'Cadastre-se na plataforma!'}
                 </h1>
@@ -33,6 +37,18 @@ export default function Auth() {
                 <button onClick={submit} className={`w-full px-4 py-3 rounded-lg text-white bg-red-500 hover:bg-red-400`}>
                     Entrar com Google
                 </button>
+
+                {mode === 'login' ? (
+                    <p className={`mt-8`}>
+                        Novo por aqui?
+                        <a onClick={() => setMode('register')} className={`font-semibold cursor-pointer text-blue-500 hover:text-blue-700`}> Crie sua conta!</a>
+                    </p>
+                ) : (
+                    <p className={`mt-8 justify-center `}>
+                        Já faz parte da nossa comunidade?
+                        <a onClick={() => setMode('login')} className={`font-semibold cursor-pointer text-blue-500 hover:text-blue-700`}> Faça o login!</a>
+                    </p>
+                )}
             </div>
         </div>
     )
