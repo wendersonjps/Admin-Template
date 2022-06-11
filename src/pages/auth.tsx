@@ -1,10 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
 
-import AuthInput from '../components/auth/AuthInput'
 import { IconWarning } from '../components/icons/index'
+import AuthInput from '../components/auth/AuthInput'
+import useAuth from '../data/hook/useAuth'
 
 export default function Auth() {
+
+    const { user, loginGoogle } = useAuth()
+
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'register'>('login')
     const [email, setEmail] = useState('')
@@ -51,7 +54,7 @@ export default function Auth() {
 
                 <hr className={`my-6 w-full border-gray-300`} />
 
-                <button onClick={submit} className={`w-full px-4 py-3 rounded-lg text-white bg-red-500 hover:bg-red-400`}>
+                <button onClick={loginGoogle} className={`w-full px-4 py-3 rounded-lg text-white bg-red-500 hover:bg-red-400`}>
                     Entrar com Google
                 </button>
 
