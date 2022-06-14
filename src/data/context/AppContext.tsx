@@ -1,7 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
 
-/* type Theme = 'dark' | '' */
-
 interface AppContextProps {
     theme?: string
     themeToggle?: () => void
