@@ -6,7 +6,7 @@ import useAuth from '../data/hook/useAuth'
 
 export default function Auth() {
 
-    const { user, loginGoogle } = useAuth()
+    const { register, login, loginGoogle } = useAuth()
 
     const [error, setError] = useState(null)
     const [mode, setMode] = useState<'login' | 'register'>('login')
@@ -18,13 +18,15 @@ export default function Auth() {
         setTimeout(() => setError(null), time * 1000)
     }
 
-    function submit() {
-        if (mode === 'login') {
-            console.log('login')
-            showError('Ocorreu um erro no login!')
-        } else {
-            console.log('register')
-            showError('Ocorreu um erro ao cadastrar!')
+    async function submit() {
+        try {
+            if (mode === 'login') {
+                await login(email, password)
+            } else {
+                await register(email, password)
+            }
+        } catch (e) {
+            showError(e?.message ?? 'Ops! Ocorreu um erro!')
         }
     }
 
